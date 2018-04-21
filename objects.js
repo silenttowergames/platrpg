@@ -211,6 +211,9 @@ function O(){
 		gravity:0,
 		gravityLimit:5,
 		
+		coyoteTime:0,
+		coyoteTimeLimit:10,
+		
 		attack:false,
 		jump:false,
 		moveLeft:false,
@@ -223,7 +226,7 @@ function O(){
 		// Gameplay function
 		logic:function(){
 			// Jumping
-			if(this.jump && this.touchingBottom()){
+			if(this.jump && this.coyoteTime < this.coyoteTimeLimit){
 				this.gravity=-3.5;
 			}
 			
@@ -270,6 +273,8 @@ function O(){
 			
 			// Perform gravity math
 			if(this.touchingBottom()){
+				this.coyoteTime=0;
+				
 				while(this.touchingBottom(true)){
 					this.position.Y--;
 				}
@@ -279,6 +284,8 @@ function O(){
 				if(this.gravity < this.gravityLimit){
 					this.gravity+=0.2;
 				}
+				
+				this.coyoteTime++;
 			}
 			
 			
