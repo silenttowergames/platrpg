@@ -9,6 +9,8 @@ function loop(){
 
 function update(){
 	P().update();
+	
+	I().update();
 }
 
 function draw(){

@@ -36,18 +36,28 @@ function O(){
 			animation=this.animation.list[this.animation.animID];
 			frame=animation[this.animation.frameID];
 			
+			if(this.flip){
+				D().scale(-1,1);
+			}
+			
 			D().drawImage(
 				G(),
 				1 + (frame[0] * 9),
 				1 + (9 * this.textureY),
 				8,
 				8,
-				this.position.X * S().zoom,
+				(this.position.X + (this.flip ? 8 : 0)) * S().zoom * (this.flip ? -1 : 1),
 				this.position.Y * S().zoom,
 				8 * S().zoom,
 				8 * S().zoom
 			);
+			
+			if(this.flip){
+				D().scale(-1,1);
+			}
 		},
+		
+		flip:false,
 		
 		hitbox:function(){
 			return {
@@ -59,8 +69,8 @@ function O(){
 		},
 		
 		position:{
-			X:0,
-			Y:0
+			X:32,
+			Y:32
 		},
 		
 		textureY:0,
@@ -73,8 +83,11 @@ function O(){
 		
 		touchingBottom:function(isWhile){
 			let
-				X=Math.floor(this.position.X / 8),
-				Y=Math.floor((this.position.Y + 8 - (isWhile == true ? 1 : 0)) / 8)
+				X=[
+					Math.floor((this.position.X + 1) / 8),
+					Math.floor((this.position.X + 6) / 8)
+				],
+				Y=Math.floor((this.position.Y + 8 - (isWhile ? 1 : 0)) / 8)
 			;
 			
 			for(let y=Y;y<Y+1;y++){
@@ -82,12 +95,104 @@ function O(){
 					continue;
 				}
 				
-				for(let x=X;x<X+1;x++){
-					if(x < 0 || x >= M()[y].length){
+				for(let x=0;x<X.length;x++){
+					let xx=X[x];
+					
+					if(xx < 0 || xx >= M()[y].length){
 						continue;
 					}
 					
-					if(Solids().indexOf(M()[y][x]) != -1){
+					if(Solids().indexOf(M()[y][xx]) != -1){
+						return true;
+					}
+				}
+			}
+			
+			return false;
+		},
+		
+		touchingRight:function(isWhile){
+			let
+				Y=[
+					Math.floor((this.position.Y + 1) / 8),
+					Math.floor((this.position.Y + 6) / 8)
+				],
+				X=Math.floor((this.position.X + 7 - (isWhile ? 1 : 0)) / 8)
+			;
+			
+			for(let y=0;y<Y.length;y++){
+				let yy=Y[y];
+				
+				if(yy < 0 || yy >= M().length){
+					continue;
+				}
+				
+				for(let x=X;x<X+1;x++){
+					if(x < 0 || x >= M()[yy].length){
+						continue;
+					}
+					
+					if(Solids().indexOf(M()[yy][x]) != -1){
+						return true;
+					}
+				}
+			}
+			
+			return false;
+		},
+		
+		touchingLeft:function(isWhile){
+			let
+				Y=[
+					Math.floor((this.position.Y + 1) / 8),
+					Math.floor((this.position.Y + 6) / 8)
+				],
+				X=Math.floor((this.position.X - (isWhile ? 1 : 0)) / 8)
+			;
+			
+			for(let y=0;y<Y.length;y++){
+				let yy=Y[y];
+				
+				if(yy < 0 || yy >= M().length){
+					continue;
+				}
+				
+				for(let x=X;x<X+1;x++){
+					if(x < 0 || x >= M()[yy].length){
+						continue;
+					}
+					
+					if(Solids().indexOf(M()[yy][x]) != -1){
+						return true;
+					}
+				}
+			}
+			
+			return false;
+		},
+		
+		touchingTop:function(isWhile){
+			let
+				X=[
+					Math.floor((this.position.X + 1) / 8),
+					Math.floor((this.position.X + 6) / 8)
+				],
+				Y=Math.floor((this.position.Y - (isWhile ? 1 : 0)) / 8)
+			;
+			
+			for(let y=Y;y<Y+1;y++){
+				if(y < 0 || y >= M().length){
+					continue;
+				}
+				
+				for(let x=0;x<X.length;x++){
+					let xx=X[x];
+					
+					if(xx < 0 || xx >= M()[y].length){
+						continue;
+					}
+					
+					if(Solids().indexOf(M()[y][xx]) != -1){
 						return true;
 					}
 				}
@@ -110,6 +215,52 @@ function O(){
 		
 		// Gameplay function
 		update:function(){
+			// Jumping
+			if(I().pressed(' ') && this.touchingBottom()){
+				this.gravity=-3;
+			}
+			
+			
+			
+			
+			
+			// Walking
+			let Xmove=0;
+			if(I().down('ArrowRight')){
+				this.flip=false;
+				Xmove++;
+			}
+			
+			if(I().down('ArrowLeft')){
+				this.flip=true;
+				Xmove--;
+			}
+			
+			
+			
+			
+			
+			// Move object
+			this.position.X += Xmove;
+			this.position.X=Math.round(this.position.X);
+			
+			this.position.Y += this.gravity;
+			this.position.Y=Math.round(this.position.Y);
+			
+			
+			
+			
+			
+			// Ceilings
+			while(this.touchingTop()){
+				this.position.Y++;
+				this.gravity=0;
+			}
+			
+			
+			
+			
+			
 			// Perform gravity math
 			if(this.touchingBottom()){
 				while(this.touchingBottom(true)){
@@ -119,7 +270,7 @@ function O(){
 				this.gravity=0;
 			}else{
 				if(this.gravity < this.gravityLimit){
-					this.gravity++;
+					this.gravity+=0.2;
 				}
 			}
 			
@@ -127,8 +278,14 @@ function O(){
 			
 			
 			
-			// Move object
-			this.position.Y += this.gravity;
+			// Walls
+			while(this.touchingRight()){
+				this.position.X--;
+			}
+			
+			while(this.touchingLeft()){
+				this.position.X++;
+			}
 		}
 	};
 }
