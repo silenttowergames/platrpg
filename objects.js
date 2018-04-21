@@ -46,7 +46,7 @@ function O(){
 				1 + (9 * this.textureY),
 				8,
 				8,
-				(this.position.X + (this.flip ? 8 : 0)) * S().zoom * (this.flip ? -1 : 1),
+				(this.position.X + (this.flip ? 8 : 0)) * S().zoom * (this.flip ? -1 : 1) - (Cam().position.X * (this.flip ? -1 : 1)),
 				this.position.Y * S().zoom,
 				8 * S().zoom,
 				8 * S().zoom
@@ -201,6 +201,8 @@ function O(){
 			return false;
 		},
 		
+		update:function(){},
+		
 		
 		
 		
@@ -209,15 +211,20 @@ function O(){
 		gravity:0,
 		gravityLimit:5,
 		
+		attack:false,
+		jump:false,
+		moveLeft:false,
+		moveRight:false,
+		
 		
 		
 		
 		
 		// Gameplay function
-		update:function(){
+		logic:function(){
 			// Jumping
-			if(I().pressed(' ') && this.touchingBottom()){
-				this.gravity=-3;
+			if(this.jump && this.touchingBottom()){
+				this.gravity=-3.5;
 			}
 			
 			
@@ -226,12 +233,12 @@ function O(){
 			
 			// Walking
 			let Xmove=0;
-			if(I().down('ArrowRight')){
+			if(this.moveRight){
 				this.flip=false;
 				Xmove++;
 			}
 			
-			if(I().down('ArrowLeft')){
+			if(this.moveLeft){
 				this.flip=true;
 				Xmove--;
 			}
@@ -293,8 +300,30 @@ function O(){
 function P(){
 	if(window.player == undefined){
 		let p=new O();
+		
+		p.update=function(){
+			this.moveRight=I().down('ArrowRight');
+			this.moveLeft=I().down('ArrowLeft');
+			this.attack=I().down('ArrowDown');
+			this.jump=I().pressed('ArrowUp');
+			
+			this.logic();
+		};
+		
 		window.player=p;
 	}
 	
 	return window.player;
 }
+
+function E(){
+	let e=new O();
+	
+	e.update=function(){
+		this.logic();
+	};
+	
+	return e;
+}
+
+var TestEnemy=new E();

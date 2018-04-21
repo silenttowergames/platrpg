@@ -9,7 +9,9 @@ function loop(){
 
 function update(){
 	P().update();
+	window.TestEnemy.update();
 	
+	Cam().update();
 	I().update();
 }
 
@@ -35,7 +37,7 @@ function draw(){
 				19,
 				8,
 				8,
-				X * 8 * S().zoom,
+				X * 8 * S().zoom - Cam().position.X,
 				Y * 8 * S().zoom,
 				8 * S().zoom,
 				8 * S().zoom
@@ -44,4 +46,5 @@ function draw(){
 	}
 	
 	P().draw();
+	window.TestEnemy.draw();
 }
