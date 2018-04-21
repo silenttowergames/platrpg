@@ -6,7 +6,7 @@ function F(set){
 	return window.FightObject;
 }
 
-function Fight(getThreshold){
+function Fight(){
 	return {
 		conversation:[],
 		
@@ -16,11 +16,9 @@ function Fight(getThreshold){
 		characterWait:0,
 		characterWaitLimit:4,
 		
-		yourTurn:false,
+		yourTurn:true,
 		turnEnding:false,
 		playerMove:null,
-		
-		logic:function(){},
 		
 		draw:function(){
 			D().fillText(
@@ -31,10 +29,11 @@ function Fight(getThreshold){
 			
 			
 			
-			if(this.yourTurn && this.playerMove == null){
+			if(this.convoStringID >= this.conversation.length && this.yourTurn && this.playerMove == null){
 				TurnMenu().draw();
 			}
 		},
+		// draw()
 		
 		e:null,
 		
@@ -65,7 +64,105 @@ function Fight(getThreshold){
 			}else{
 				this.logic();
 			}
-		}
+		},
+		// update()
+		
+		
+		
+		
+		
+		logic:function(){
+			if(this.yourTurn){
+				if(this.playerMove == null){
+					TurnMenu().update();
+				}else{
+					if(this.turnEnding){
+						if(P().position.X > this.threshold){
+							P().moveLeft=!(P().moveRight=false);
+						}else{
+							P().moveLeft=false;
+							P().flip=false;
+							P().position.X=this.threshold;
+							this.playerMove=null;
+							this.turnEnding=false;
+							this.yourTurn=false;
+						}
+					}else{
+						switch(this.playerMove){
+							// Jump move
+							case 0:
+								P().moveRight=P().position.X < this.e.position.X;
+								
+								if(P().jump){
+									P().jump=false;
+								}else if(P().position.X == this.e.position.X - 32){
+									P().jump=true;
+								}
+								
+								if(
+									P().position.X > this.e.position.X - 8
+									&&
+									P().position.Y > this.e.position.Y - 8
+								){
+									P().gravity=-3;
+									this.turnEnding=true;
+									P().moveLeft=!(P().moveRight=false);
+									Ef().new(
+										TurnMenu().options[this.playerMove].points,
+										P().position.X + 8,
+										P().position.Y
+									);
+								}
+								
+								break;
+							
+							// Hit move
+							case 1:
+								break;
+							
+							default:
+								this.playerMove=null;
+								break;
+						}
+					}
+				}
+			}else{
+				if(this.turnEnding){
+					if(this.e.position.X < this.e.position.initX){
+						this.e.moveLeft=!(this.e.moveRight=true);
+					}else{
+						this.e.moveRight=false;
+						this.e.flip=true;
+						this.e.position.X=this.e.position.initX;
+						this.turnEnding=false;
+						this.yourTurn=true;
+					}
+				}else{
+					this.e.moveLeft=this.e.position.X > P().position.X;
+					
+					if(
+						this.e.position.X < P().position.X + 8
+						&&
+						this.e.position.Y > P().position.Y - 8
+					){
+						this.e.gravity=-3;
+						this.turnEnding=true;
+						Ef().new(
+							this.e.attackPower,
+							P().position.X,
+							P().position.Y
+						);
+					}
+					
+					if(this.e.jump){
+						this.e.jump=false;
+					}else if(this.e.position.X == P().position.X + 28){
+						this.e.jump=true;
+					}
+				}
+			}
+		},
+		// logic()
 	};
 }
 
@@ -74,11 +171,15 @@ function Fight(getThreshold){
 
 
 function FirstFight(getThreshold){
+	let threshold=104;
+	
 	if(getThreshold){
-		return 104;
+		return threshold;
 	}
 	
 	let F=new Fight();
+	
+	F.threshold=threshold;
 	
 	F.conversation=[
 		'Halt!',
@@ -87,57 +188,6 @@ function FirstFight(getThreshold){
 	];
 	
 	F.e=window.FirstEnemy;
-	
-	F.logic=function(){
-		if(this.yourTurn){
-			if(this.playerMove == null){
-				TurnMenu().update();
-			}else{
-				switch(this.playerMove){
-					// Jump move
-					case 0:
-						break;
-					
-					// Hit move
-					case 1:
-						break;
-					
-					default:
-						this.playerMove=null;
-						break;
-				}
-			}
-		}else{
-			if(this.turnEnding){
-				if(this.e.position.X < this.e.position.initX){
-					this.e.moveLeft=!(this.e.moveRight=true);
-				}else{
-					this.e.moveRight=false;
-					this.e.flip=true;
-					this.e.position.X=this.e.position.initX;
-					this.turnEnding=false;
-					this.yourTurn=true;
-				}
-			}else{
-				this.e.moveLeft=this.e.position.X > P().position.X;
-				
-				if(
-					this.e.position.X < P().position.X + 8
-					&&
-					this.e.position.Y > P().position.Y - 8
-				){
-					this.e.gravity-=7;
-					this.turnEnding=true;
-				}
-				
-				if(this.e.jump){
-					this.e.jump=false;
-				}else if(this.e.position.X == P().position.X + 28){
-					this.e.jump=true;
-				}
-			}
-		}
-	};
 	
 	return F;
 }

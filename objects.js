@@ -314,7 +314,7 @@ function P(){
 				this.moveLeft=I().down('ArrowLeft');
 				this.attack=I().down('ArrowDown');
 				this.jump=I().pressed('ArrowUp');
-			}else{
+			}else if(!F() || F().convoStringID >= 0 && F().convoStringID < F().conversation.length){
 				this.moveRight=this.moveLeft=this.attack=this.jump=false;
 			}
 			
@@ -329,6 +329,8 @@ function P(){
 
 function E(){
 	let e=new O();
+	
+	e.attackPower=1;
 	
 	e.flip=true;
 	

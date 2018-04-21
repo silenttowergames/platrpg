@@ -19,6 +19,7 @@ function update(){
 	P().update();
 	window.FirstEnemy.update();
 	
+	Ef().update();
 	Cam().update();
 	I().update();
 }
@@ -59,7 +60,10 @@ function draw(){
 	
 	P().draw();
 	window.FirstEnemy.draw();
+	
 	if(F()){
 		F().draw();
 	}
+	
+	Ef().draw();
 }
