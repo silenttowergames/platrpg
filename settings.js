@@ -4,8 +4,8 @@ function S(){
 
 var Settings={
 	size:{
-		X:320,
-		Y:180
+		X:160,
+		Y:90
 	},
 	
 	zoom:1
