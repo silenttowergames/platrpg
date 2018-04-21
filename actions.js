@@ -8,6 +8,12 @@ function loop(){
 }
 
 function update(){
+	if(!F()){
+		F(new Fight());
+	}
+	
+	F().update();
+	
 	P().update();
 	window.TestEnemy.update();
 	
@@ -20,6 +26,10 @@ function draw(){
 	
 	D().fillStyle='#000';
 	D().fillRect(0,0,C().width,C().height);
+	
+	D().textBaseline='top';
+	D().font=(4 * S().zoom) + 'px PressStart2P';
+	D().fillStyle='#FFF';
 	
 	D().imageSmoothingEnabled=false;
 	
@@ -47,4 +57,5 @@ function draw(){
 	
 	P().draw();
 	window.TestEnemy.draw();
+	F().draw();
 }

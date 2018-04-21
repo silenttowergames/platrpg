@@ -227,7 +227,7 @@ function O(){
 		logic:function(){
 			// Jumping
 			if(this.jump && this.coyoteTime < this.coyoteTimeLimit){
-				this.gravity=-3.5;
+				this.gravity=-4;
 			}
 			
 			
@@ -282,7 +282,7 @@ function O(){
 				this.gravity=0;
 			}else{
 				if(this.gravity < this.gravityLimit){
-					this.gravity+=0.2;
+					this.gravity+=0.3;
 				}
 				
 				this.coyoteTime++;
@@ -309,10 +309,12 @@ function P(){
 		let p=new O();
 		
 		p.update=function(){
-			this.moveRight=I().down('ArrowRight');
-			this.moveLeft=I().down('ArrowLeft');
-			this.attack=I().down('ArrowDown');
-			this.jump=I().pressed('ArrowUp');
+			if(!F()){
+				this.moveRight=I().down('ArrowRight');
+				this.moveLeft=I().down('ArrowLeft');
+				this.attack=I().down('ArrowDown');
+				this.jump=I().pressed('ArrowUp');
+			}
 			
 			this.logic();
 		};
