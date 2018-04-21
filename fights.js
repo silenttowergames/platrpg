@@ -1,5 +1,5 @@
 function F(set){
-	if(set != undefined){
+	if(set !== undefined){
 		window.FightObject=set;
 	}
 	
@@ -20,6 +20,10 @@ function Fight(){
 		turnEnding:false,
 		playerMove:null,
 		
+		psychic:false,
+		
+		dead:null,
+		
 		draw:function(){
 			D().fillText(
 				this.convoString,
@@ -29,7 +33,7 @@ function Fight(){
 			
 			
 			
-			if(this.convoStringID >= this.conversation.length && this.yourTurn && this.playerMove == null){
+			if(this.dead == null && this.convoStringID >= this.conversation.length && this.yourTurn && this.playerMove == null){
 				TurnMenu().draw();
 			}
 		},
@@ -72,6 +76,27 @@ function Fight(){
 		
 		
 		logic:function(){
+			let alreadyDead=this.dead != null;
+			
+			if(
+				P().position.X == this.threshold
+				&&
+				this.e.position.X == this.e.position.initX
+				&&
+				(
+					(P().health <= 0 && (this.dead = P()))
+					||
+					(this.e.health <= 0 && (this.dead=this.e))
+				)
+			){
+				if(!alreadyDead){
+					this.dead.gravity=-5;
+				}
+				
+				this.dead.touchingBottom=this.dead.touchingTop=this.dead.touchingLeft=this.dead.touchingRight=function(){return false;}
+				return;
+			}
+			
 			if(this.yourTurn){
 				if(this.playerMove == null){
 					TurnMenu().update();
@@ -107,8 +132,9 @@ function Fight(){
 									P().gravity=-3;
 									this.turnEnding=true;
 									P().moveLeft=!(P().moveRight=false);
+									this.e.health-=(hpm=TurnMenu().options[this.playerMove].points + Math.round(TurnMenu().options[this.playerMove].points * (P().level / 4)));
 									Ef().new(
-										TurnMenu().options[this.playerMove].points,
+										hpm,
 										P().position.X + 8,
 										P().position.Y
 									);
@@ -120,8 +146,15 @@ function Fight(){
 							case 1:
 								break;
 							
+							case 2:
+								this.psychic=true;
+								this.playerMove=null;
+								this.yourTurn=false;
+								break;
+							
 							default:
 								this.playerMove=null;
+								this.turnEnding=true;
 								break;
 						}
 					}
@@ -147,6 +180,7 @@ function Fight(){
 					){
 						this.e.gravity=-3;
 						this.turnEnding=true;
+						P().health-=this.e.attackPower;
 						Ef().new(
 							this.e.attackPower,
 							P().position.X,

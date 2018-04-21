@@ -9,7 +9,7 @@ function loop(){
 
 function update(){
 	if(!F()){
-		if(P().position.X >= FirstFight(true)){
+		if(window.FirstEnemy.health > 0 && P().position.X >= FirstFight(true)){
 			F(new FirstFight());
 		}
 	}else{
@@ -22,6 +22,14 @@ function update(){
 	Ef().update();
 	Cam().update();
 	I().update();
+	
+	if(P().position.Y > S().size.Y * 1.5){
+		P(true);
+	}
+	
+	if(F() && F().e.position.Y > S().size.Y * 1.5){
+		F(null);
+	}
 }
 
 function draw(){
@@ -66,4 +74,41 @@ function draw(){
 	}
 	
 	Ef().draw();
+	
+	// HUD
+	D().fillText(
+		'Lvl ' + P().level,
+		(S().size.X - 60) * S().zoom,
+		2 * S().zoom
+	)
+	
+	for(let i=0;i<P().health;i++){
+		D().drawImage(
+			G(),
+			1 + (9 * 1),
+			1 + (9 * 3),
+			8,
+			8,
+			(S().size.X - (8 * (i + 1))) * S().zoom,
+			2 * S().zoom,
+			8 * S().zoom,
+			8 * S().zoom
+		);
+	}
+	
+	if(F() && F().psychic){
+		for(let i=0;i<F().e.health;i++){
+			D().drawImage(
+				G(),
+				1,
+				1 + (9 * 3),
+				8,
+				8,
+				(S().size.X - (8 * (i + 1))) * S().zoom,
+				(2 + 8) * S().zoom,
+				8 * S().zoom,
+				8 * S().zoom
+			);
+		}
+	}
 }

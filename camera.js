@@ -8,7 +8,11 @@ var Camera = {
 		let farthestRight=M()[M().length - 1].length * 8;
 		let anchor=32;
 		
-		this.position.X=P().position.X - anchor;
+		if(!F()){
+			this.position.X=P().position.X - anchor;
+		}else{
+			this.position.X=F().threshold - anchor;
+		}
 		
 		if(this.position.X < 0){
 			this.position.X=0;

@@ -11,18 +11,27 @@ function TurnMenu(){
 					title:'Hit Attack',
 					points:3,
 					enabled:true
+				},
+				{
+					title:'Psychic',
+					points:0,
+					enabled:true
 				}
 			],
 			
 			optionID:0,
 			
 			update:function(){
+				if(F()){
+					this.options[2].enabled=!F().psychic;
+				}
+				
 				if(I().pressed('ArrowDown')){
 					this.optionID++;
 				}
 				
 				if(I().pressed('ArrowUp')){
-					this.optionID++;
+					this.optionID--;
 				}
 				
 				if(this.optionID < 0){
@@ -35,6 +44,7 @@ function TurnMenu(){
 				
 				if(I().pressed(' ')){
 					F().playerMove=this.optionID;
+					this.optionID=0;
 				}
 			},
 			

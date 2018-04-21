@@ -75,6 +75,10 @@ function O(){
 		
 		textureY:0,
 		
+		health:5,
+		
+		level:0,
+		
 		
 		
 		
@@ -304,9 +308,13 @@ function O(){
 	};
 }
 
-function P(){
-	if(window.player == undefined){
+function P(startOver){
+	if(window.player == undefined || startOver){
+		F(null);
+		
 		let p=new O();
+		
+		p.position.X=16;
 		
 		p.update=function(){
 			if(!F()){
@@ -331,6 +339,8 @@ function E(){
 	let e=new O();
 	
 	e.attackPower=1;
+	
+	e.health=1;
 	
 	e.flip=true;
 	
