@@ -7,20 +7,37 @@
 <title>Platformer RPG</title>
 <style type="text/css">
 body {
-	background-color:#000;
+	background-color:#333;
 	margin:0;
 }
 
 canvas {
 	background-color:#F0F;
+	position:fixed;
+}
+
+img {
+	display:none;
 }
 </style>
 <script type="text/javascript">
-
+var scripts=[
+	'actions',
+	'canvas',
+	'settings',
+	'sprites'
+];
+for(let i in scripts){
+	let scr=document.createElement('script');
+	scr.type='text/javascript';
+	scr.src=scripts[i] + '.js';
+	document.head.appendChild(scr);
+}
 </script>
 </head>
 
 <body>
+<img src="sprites.png" id="sprites">
 <canvas id="c"></canvas>
 </body>
 
