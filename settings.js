@@ -10,3 +10,8 @@ var Settings={
 	
 	zoom:1
 };
+
+// Albums listened to while programming this:
+// DAMN. - Kendrick Lamar
+// No Love Deep Web - Death Grips
+// Mezmerize - System of a Down

@@ -314,6 +314,8 @@ function P(){
 				this.moveLeft=I().down('ArrowLeft');
 				this.attack=I().down('ArrowDown');
 				this.jump=I().pressed('ArrowUp');
+			}else{
+				this.moveRight=this.moveLeft=this.attack=this.jump=false;
 			}
 			
 			this.logic();
@@ -328,6 +330,10 @@ function P(){
 function E(){
 	let e=new O();
 	
+	e.flip=true;
+	
+	e.position.X=e.position.initX=180;
+	
 	e.update=function(){
 		this.logic();
 	};
@@ -335,4 +341,4 @@ function E(){
 	return e;
 }
 
-var TestEnemy=new E();
+var FirstEnemy=new E();

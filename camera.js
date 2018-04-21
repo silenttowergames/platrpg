@@ -6,7 +6,7 @@ var Camera = {
 	
 	update:function(){
 		let farthestRight=M()[M().length - 1].length * 8;
-		let anchor=64;
+		let anchor=32;
 		
 		this.position.X=P().position.X - anchor;
 		

@@ -9,13 +9,15 @@ function loop(){
 
 function update(){
 	if(!F()){
-		F(new Fight());
+		if(P().position.X >= FirstFight(true)){
+			F(new FirstFight());
+		}
+	}else{
+		F().update();
 	}
 	
-	F().update();
-	
 	P().update();
-	window.TestEnemy.update();
+	window.FirstEnemy.update();
 	
 	Cam().update();
 	I().update();
@@ -56,6 +58,8 @@ function draw(){
 	}
 	
 	P().draw();
-	window.TestEnemy.draw();
-	F().draw();
+	window.FirstEnemy.draw();
+	if(F()){
+		F().draw();
+	}
 }
