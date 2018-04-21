@@ -8,7 +8,7 @@ function loop(){
 }
 
 function update(){
-	
+	P().update();
 }
 
 function draw(){
@@ -41,15 +41,5 @@ function draw(){
 		}
 	}
 	
-	D().drawImage(
-		G(),
-		1,
-		1,
-		8,
-		8,
-		0,
-		0,
-		8 * S().zoom,
-		8 * S().zoom
-	);
+	P().draw();
 }
