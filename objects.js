@@ -10,8 +10,24 @@ function O(){
 				
 				walk:[
 					[ 4, 5 ],
+					[ 0, 5 ],
+					[ 5, 5 ],
 					[ 0, 5 ]
-				]
+				],
+				
+				jumping:[
+					[ 0, 0 ]
+				],
+				
+				falling:[
+					[1, 0 ]
+				],
+				
+				attacking:[
+					[ 2, 8 ],
+					[ 3, 4 ],
+					[ 2, 8 ],
+				],
 			},
 			
 			animID:'idle',
@@ -78,6 +94,9 @@ function O(){
 		health:5,
 		
 		level:0,
+		
+		attacking:0,
+		attackingLimit:60,
 		
 		
 		
@@ -229,6 +248,20 @@ function O(){
 		
 		// Gameplay function
 		logic:function(){
+			if(this.attacking > 0){
+				this.attacking--;
+				
+				if(this.animation.animID != 'attacking'){
+					this.animation.animID='attacking';
+					this.animation.frameID=0;
+					this.animation.duration=this.animation.list.attacking[0][1];
+				}
+				
+				return;
+			}
+			
+			let setAnimation='idle';
+			
 			// Jumping
 			if(this.jump && this.coyoteTime < this.coyoteTimeLimit){
 				this.gravity=-4;
@@ -243,11 +276,13 @@ function O(){
 			if(this.moveRight){
 				this.flip=false;
 				Xmove++;
+				setAnimation='walk';
 			}
 			
 			if(this.moveLeft){
 				this.flip=true;
 				Xmove--;
+				setAnimation='walk';
 			}
 			
 			
@@ -285,6 +320,12 @@ function O(){
 				
 				this.gravity=0;
 			}else{
+				if(this.gravity > 0){
+					setAnimation='falling';
+				}else{
+					setAnimation='jumping';
+				}
+				
 				if(this.gravity < this.gravityLimit){
 					this.gravity+=0.3;
 				}
@@ -303,6 +344,16 @@ function O(){
 			
 			while(this.touchingLeft()){
 				this.position.X++;
+			}
+			
+			
+			
+			
+			
+			// Animation
+			if(setAnimation != this.animation.animID){
+				this.animation.animID=setAnimation;
+				this.animation.frameID=0;
 			}
 		}
 	};
@@ -340,7 +391,7 @@ function E(){
 	
 	e.attackPower=1;
 	
-	e.health=1;
+	e.health=3;
 	
 	e.flip=true;
 	

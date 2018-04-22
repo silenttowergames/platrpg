@@ -135,8 +135,8 @@ function Fight(){
 									this.e.health-=(hpm=TurnMenu().options[this.playerMove].points + Math.round(TurnMenu().options[this.playerMove].points * (P().level / 4)));
 									Ef().new(
 										hpm,
-										P().position.X + 8,
-										P().position.Y
+										this.e.position.X + 8,
+										this.e.position.Y
 									);
 								}
 								
@@ -144,6 +144,22 @@ function Fight(){
 							
 							// Hit move
 							case 1:
+								if(P().moveRight && P().position.X >= this.e.position.X - 12){
+									P().attacking=P().attackingLimit;
+								}
+								
+								P().moveRight=P().position.X < this.e.position.X - 12;
+								
+								if(!P().moveRight && P().attacking <= 0){
+									this.turnEnding=true;
+									this.e.health-=(hpm=TurnMenu().options[this.playerMove].points + Math.round(TurnMenu().options[this.playerMove].points * (P().level / 4)));
+									Ef().new(
+										hpm,
+										this.e.position.X + 8,
+										this.e.position.Y
+									);
+								}
+								
 								break;
 							
 							case 2:
@@ -205,7 +221,7 @@ function Fight(){
 
 
 function FirstFight(getThreshold){
-	let threshold=104;
+	let threshold=204;
 	
 	if(getThreshold){
 		return threshold;

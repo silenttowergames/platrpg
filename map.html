@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<style type="text/css">
+body {
+	background-color:#333;
+	color:#CCC;
+	margin:0;
+}
+
+canvas {
+	background-color:#F0F;
+}
+</style>
+<script type="text/javascript">
+var map=[
+	[ 2 ],
+	[ 2 ],
+	[ 2 ],
+	[ 2 ],
+	[ 2 ],
+	[ 2 ],
+	[ 2, 1, 0, 0, 0, 1, 1, 0, 1, 1, 1, 1 ],
+	[ 2, 2, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0 ],
+	[ 2, 2, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0 ],
+	[ 2, 2, 1, 1, 1, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ],
+	[ 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2 ],
+	[ 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2 ],
+];
+function M(){
+	return window.map;
+}
+function G(){
+	return document.getElementById('sprites');
+}
+function C(){
+	return document.getElementById('c');
+}
+function D(){
+	if(window.ctx != undefined){
+		return window.ctx;
+	}
+	
+	return window.ctx=C().getContext('2d');
+}
+function resizeCanvas(){
+	C().width=window.innerWidth;
+	C().height=(C().width / 6);
+}
+function loop(){
+	update();
+	draw();
+	
+	if(!window.loopInterval){
+		window.loopInterval=setInterval(loop,1000/60);
+	}
+	
+	document.querySelector('code').innerHTML=
+		Co().X + 'x' + Co().Y + '; '
+		+
+		Co().tile
+	;
+}
+function draw(){
+	D().clearRect(
+		0,
+		0,
+		C().width,
+		C().height
+	);
+	
+	D().imageSmoothingEnabled=false;
+	
+	let size=Size();
+	
+	for(let Y=0;Y<size;Y++){
+		for(let X=0;X<C().width / size; X++){
+			let coords={
+				X:2,
+				Y:2
+			};
+			
+			if(M()[Y] && M()[Y][X] && M()[Y][X] > 0){
+				coords.X=M()[Y][X] - 1;
+			}
+			
+			D().drawImage(
+				G(),
+				(9 * coords.X) + 1,
+				(9 * coords.Y) + 1,
+				8,
+				8,
+				X * size,
+				Y * size,
+				size,
+				size
+			);
+		}
+	}
+	
+	D().fillStyle='rgba(255,0,255,0.5)';
+	D().fillRect(
+		Co().X * Size(),
+		Co().Y * Size(),
+		Size(),
+		Size()
+	);
+}
+function Co(){return window.coords}
+function Size(){
+	return Math.floor(C().height / 12);
+}
+var coords={
+	X:0,
+	Y:0,
+	tile:0,
+	leftMouse:false,
+	rightMouse:false
+}
+function mouseDownMove(e){
+		e.preventDefault();
+		
+		if(!Co().left && !Co().right){
+			return;
+		}
+		
+		let tile=Co().tile + 1;
+		
+		if(Co().right){
+			tile=0;
+		}
+		
+		M()[Co().Y][Co().X]=tile;
+	}
+window.addEventListener('load',resizeCanvas);
+window.addEventListener('load',loop);
+window.addEventListener('load',function(){
+	window.addEventListener('mousedown',function(e){
+		if(e.which == 1){
+			Co().left=true;
+		}else{
+			Co().right=true;
+		}
+	});
+	
+	window.addEventListener('mouseup',function(e){
+		if(e.which == 1){
+			Co().left=false;
+		}else{
+			Co().right=false;
+		}
+	});
+	
+	C().addEventListener('mousemove',function(e){
+		let rect=C().getBoundingClientRect();
+		let size=Size();
+		
+		Co().X=Math.floor((e.clientX - rect.x) / size);
+		Co().Y=Math.floor((e.clientY - rect.y) / size);
+	});
+	
+	C().addEventListener('contextmenu',function(e){
+		e.preventDefault();
+	});
+	
+	window.addEventListener('mousedown',mouseDownMove);
+	C().addEventListener('mousemove',mouseDownMove);
+});
+window.addEventListener('resize',resizeCanvas);
+window.addEventListener('keydown',function(e){
+	if(e.key == ' '){
+		e.preventDefault();
+		
+		let str='[' + "\n";
+		
+		for(let Y in M()){
+			str+="\t" + '[' + "\n\t\t";
+			
+			let lastX=0;
+			for(let X in M()[Y]){
+				let diff=X - lastX - 1;
+				
+				for(let i=0;i<diff;i++){
+					str+='null,';
+					
+					if(i % 20 == 19){
+						str+="\n\t\t";
+					}
+				}
+				
+				str+=M()[Y][X] + ',';
+				
+				if(X + 1 % 20 == 19){
+					str+="\n\t\t";
+				}
+				
+				lastX=X;
+			}
+			
+			str+="\n\t" + '],' + "\n";
+		}
+		
+		str+='];';
+		
+		let box=document.querySelector('textarea');
+		
+		box.value=str;
+		
+		box.select();
+		
+		document.execCommand('copy');
+		
+		window.getSelection().removeAllRanges();
+	}
+	
+	if(['ArrowRight','ArrowDown'].indexOf(e.key) != -1){
+		Co().tile++;
+	}
+	
+	if(['ArrowLeft','ArrowUp'].indexOf(e.key) != -1){
+		Co().tile--;
+	}
+	
+	if(Co().tile < 0){
+		Co().tile=1;
+	}
+	
+	if(Co().tile > 1){
+		Co().tile=0;
+	}
+});
+window.addEventListener('wheel',function(e){
+	if(e.deltaY > 0){
+		Co().tile++;
+	}
+	
+	if(e.deltaY < 0){
+		Co().tile--;
+	}
+	
+	if(Co().tile < 0){
+		Co().tile=1;
+	}
+	
+	if(Co().tile > 1){
+		Co().tile=0;
+	}
+});
+
+
+
+
+
+function update(){
+	
+}
+</script>
+</head>
+<body>
+<img src="sprites.png" hidden id="sprites">
+<h1>incredibly sloppy map designer</h1>
+<canvas id="c"></canvas>
+<div><code>coordinates here</code></div>
+<div><textarea name="lol" style="margin-left:2em;width:90%;height:10em;">test</textarea></div>
+</body>
+</html>

@@ -15,3 +15,5 @@ var Settings={
 // DAMN. - Kendrick Lamar
 // No Love Deep Web - Death Grips
 // Mezmerize - System of a Down
+// Steroids - Death Grips
+// Wish You Were Here - Pink Floyd
