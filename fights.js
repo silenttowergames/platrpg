@@ -321,7 +321,7 @@ function ThirdFight(getThreshold){
 	F.conversation=[
 		'You beat up those other guys?!',
 		'Well, I\'m not so easy!',
-		'Get doomed!'
+		'Prepare to get doomed!'
 	];
 	
 	F.e=window.ThirdEnemy;
@@ -330,7 +330,7 @@ function ThirdFight(getThreshold){
 }
 
 function FourthFight(getThreshold){
-	let threshold = 300 * 8;
+	let threshold = 356 * 8;
 	
 	if(getThreshold){
 		return threshold;
@@ -342,7 +342,7 @@ function FourthFight(getThreshold){
 	
 	F.conversation=[
 		'...',
-		'I\'ve been waiting for you',
+		'I\'ve been waiting for you.',
 		'It\'s foolish to come against me!'
 	];
 	

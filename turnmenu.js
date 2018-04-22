@@ -2,19 +2,27 @@ function TurnMenu(){
 	if(!window.TurnMenuObject){
 		window.TurnMenuObject={
 			options:[
+				/**
+				 * TO THE CURIOUS:
+				 * The cooldown value here does not actually do anything other than display next to the menu option!
+				 * This was one of the very absolute last things added to the code to help users understand why the item is disabled after use
+				 */
 				{
 					title:'Jump',
 					points:1,
+					cooldown:0,
 					enabled:true
 				},
 				{
 					title:'Hit',
 					points:1.5,
+					cooldown:1,
 					enabled:true
 				},
 				{
 					title:'Psychic',
 					points:0,
+					cooldown:0,
 					enabled:true
 				}
 			],
@@ -98,7 +106,11 @@ function TurnMenu(){
 								)
 							)
 							+
-							' attack)'
+							' AP'
+							+
+							(option.cooldown ? '; ' + option.cooldown + ' cooldown' : '')
+							+
+							')'
 							+
 							(!option.enabled ? ' [can\'t]' : '')
 						),

@@ -282,7 +282,6 @@ function O(){
 			if(this.jump && this.coyoteTime < this.coyoteTimeLimit && this.gravity >= 0){
 				this.gravity=-4;
 				So().jump.play();
-				console.log(So().jump);
 			}
 			
 			
@@ -338,7 +337,7 @@ function O(){
 				
 				this.gravity=0;
 			}else{
-				if(this.gravity > 0){
+				if(this.gravity >= 0){
 					setAnimation='falling';
 				}else{
 					setAnimation='jumping';
@@ -388,8 +387,20 @@ function P(startOver){
 		
 		p.position.X=XP().lastCheckpointBuffer=XP().lastCheckpoint;
 		
+		p.isWonCountdown=0;
+		p.isWonCountdownLimit = 60;
+		
 		p.update=function(){
-			if(!F() && !XP().cutscene){
+			if(isWon()){
+				if(window.youWinColorTimer < 0){
+					if(--this.isWonCountdown < 0){
+						this.isWonCountdown=this.isWonCountdownLimit;
+						this.jump=true;
+					}else{
+						this.jump=false;
+					}
+				}
+			}else if(!F() && !XP().cutscene){
 				this.moveRight=I().down('ArrowRight');
 				this.moveLeft=I().down('ArrowLeft');
 				this.attack=I().down('ArrowDown');
@@ -410,7 +421,7 @@ function P(startOver){
 function E(){
 	let e=new O();
 	
-	e.attackPower=1.5;
+	e.attackPower=1.25;
 	
 	e.health=3;
 	
@@ -439,7 +450,8 @@ ThirdEnemy.health=5;
 ThirdEnemy.XP=400;
 ThirdEnemy.attackPower=2.25;
 var FourthEnemy=new E();
-FourthEnemy.position.X=FourthEnemy.position.initX=(300 * 8) + 60;
+FourthEnemy.position.X=FourthEnemy.position.initX=(356 * 8) + 60;
+FourthEnemy.position.Y=8;
 FourthEnemy.health=5;
 FourthEnemy.XP=950;
-FourthEnemy.attackPower=3;
+FourthEnemy.attackPower=2.75;

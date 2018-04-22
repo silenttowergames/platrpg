@@ -8,6 +8,10 @@ function loop(){
 }
 
 function update(){
+	if(window.intro > 0){
+		return;
+	}
+	
 	if(!F()){
 		if(window.FirstEnemy.health > 0 && P().position.X >= FirstFight(true)){
 			F(new FirstFight());
@@ -20,6 +24,10 @@ function update(){
 		if(window.ThirdEnemy.health > 0 && P().position.X >= ThirdFight(true)){
 			F(new ThirdFight());
 		}
+		
+		if(window.FourthEnemy.health > 0 && P().position.X >= FourthFight(true)){
+			F(new FourthFight());
+		}
 	}else{
 		F().update();
 	}
@@ -28,6 +36,7 @@ function update(){
 	window.FirstEnemy.update();
 	window.SecondEnemy.update();
 	window.ThirdEnemy.update();
+	window.FourthEnemy.update();
 	window.Vial0.update();
 	window.Vial1.update();
 	window.Vial2.update();
@@ -49,6 +58,39 @@ function update(){
 
 function draw(){
 	D().clearRect(0,0,C().width,C().height);
+	
+	if(window.intro > 0){
+		D().fillStyle='#FFF';
+		D().fillRect(0,0,C().width,C().height);
+		
+		let height=500;
+		
+		if(height > C().height){
+			height=C().height;
+		}
+		
+		let width=height * 1.334;
+		
+		D().drawImage(
+			document.getElementById('logo'),
+			(C().width - width) / 2,
+			(C().height - height) / 2,
+			width,
+			height
+		);
+		
+		if(window.intro < 15){
+			let alpha=1 / (15 / (15 - (window.intro)));
+			
+			console.log(alpha);
+			
+			D().fillStyle='rgba(0,0,0,' + alpha + ')';
+			D().fillRect(0,0,C().width,C().height);
+		}
+		
+		window.intro--;
+		return;
+	}
 	
 	D().fillStyle='#000';
 	D().fillRect(0,0,C().width,C().height);
@@ -88,6 +130,7 @@ function draw(){
 	window.FirstEnemy.draw();
 	window.SecondEnemy.draw();
 	window.ThirdEnemy.draw();
+	window.FourthEnemy.draw();
 	
 	if(F()){
 		F().draw();
@@ -137,4 +180,46 @@ function draw(){
 			);
 		}
 	}
+	
+	if(isWon() && --window.startCelebratingTimer < 0){
+		if(--window.youWinColorTimer < 0){
+			do {
+				window.randomColor='#';
+				
+				for(let i=0;i<3;i++){
+					window.randomColor+=Math.round(Math.random() * 1) == 1 ? 'F' : '0';
+				}
+			}
+			while(window.randomColor == '#000');
+			
+			window.youWinColorTimer=window.youWinColorTimerLimit;
+		}
+		
+		D().fillStyle=randomColor;
+		D().font=(12 * S().zoom) + 'px PressStart2P';
+		
+		D().fillText(
+			'You Win!',
+			((S().size.X / 2) - 42) * S().zoom,
+			16 * S().zoom
+		);
+	}
 }
+
+function isWon(){
+	return (
+		window.FirstEnemy.health <= 0
+		&&
+		window.SecondEnemy.health <= 0
+		&&
+		window.ThirdEnemy.health <= 0
+		&&
+		window.FourthEnemy.health <= 0
+	);
+}
+
+window.youWinColorTimer=0;
+window.youWinColorTimerLimit=5;
+window.startCelebratingTimer=90;
+
+window.intro=60;
