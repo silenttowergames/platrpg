@@ -16,11 +16,11 @@ function O(){
 				],
 				
 				jumping:[
-					[ 0, 0 ]
+					[ 6, 0 ]
 				],
 				
 				falling:[
-					[1, 0 ]
+					[ 1, 0 ]
 				],
 				
 				attacking:[
@@ -97,6 +97,8 @@ function O(){
 		
 		attacking:0,
 		attackingLimit:60,
+		
+		XP:0,
 		
 		
 		
@@ -365,10 +367,13 @@ function P(startOver){
 		
 		let p=new O();
 		
+		p.level=XP().currentLevel;
+		p.XP=XP().currentXP;
+		
 		p.position.X=16;
 		
 		p.update=function(){
-			if(!F()){
+			if(!F() && !XP().cutscene){
 				this.moveRight=I().down('ArrowRight');
 				this.moveLeft=I().down('ArrowLeft');
 				this.attack=I().down('ArrowDown');
@@ -389,13 +394,15 @@ function P(startOver){
 function E(){
 	let e=new O();
 	
-	e.attackPower=1;
+	e.attackPower=1.5;
 	
 	e.health=3;
 	
 	e.flip=true;
 	
-	e.position.X=e.position.initX=180;
+	e.XP=105;
+	
+	e.position.X=e.position.initX=380;
 	
 	e.update=function(){
 		this.logic();
@@ -405,3 +412,13 @@ function E(){
 }
 
 var FirstEnemy=new E();
+var SecondEnemy=new E();
+SecondEnemy.position.X=SecondEnemy.position.initX=(124 * 8) + 60;
+SecondEnemy.health=4;
+SecondEnemy.XP=245;
+SecondEnemy.attackPower=2;
+var ThirdEnemy=new E();
+ThirdEnemy.position.X=ThirdEnemy.position.initX=(250 * 8) + 60;
+ThirdEnemy.health=4.5;
+ThirdEnemy.XP=400;
+ThirdEnemy.attackPower=2.25;

@@ -12,22 +12,36 @@ function update(){
 		if(window.FirstEnemy.health > 0 && P().position.X >= FirstFight(true)){
 			F(new FirstFight());
 		}
+		
+		if(window.SecondEnemy.health > 0 && P().position.X >= SecondFight(true)){
+			F(new SecondFight());
+		}
+		
+		if(window.ThirdEnemy.health > 0 && P().position.X >= ThirdFight(true)){
+			F(new ThirdFight());
+		}
 	}else{
 		F().update();
 	}
 	
 	P().update();
 	window.FirstEnemy.update();
+	window.SecondEnemy.update();
+	window.ThirdEnemy.update();
+	window.Vial0.update();
+	window.Vial1.update();
 	
 	Ef().update();
 	Cam().update();
 	I().update();
+	XP().update();
 	
 	if(P().position.Y > S().size.Y * 1.5){
 		P(true);
 	}
 	
 	if(F() && F().e.position.Y > S().size.Y * 1.5){
+		P().XP += F().e.XP;
 		F(null);
 	}
 }
@@ -66,8 +80,12 @@ function draw(){
 		}
 	}
 	
+	window.Vial0.draw();
+	window.Vial1.draw();
 	P().draw();
 	window.FirstEnemy.draw();
+	window.SecondEnemy.draw();
+	window.ThirdEnemy.draw();
 	
 	if(F()){
 		F().draw();
@@ -78,9 +96,15 @@ function draw(){
 	// HUD
 	D().fillText(
 		'Lvl ' + P().level,
-		(S().size.X - 60) * S().zoom,
+		(S().size.X - 64) * S().zoom,
 		2 * S().zoom
-	)
+	);
+	
+	D().fillText(
+		'XP: ' + XP().XPify(P().XP) + "/" + XP().limits[P().level],
+		(S().size.X - 64) * S().zoom,
+		4 * S().zoom
+	);
 	
 	for(let i=0;i<P().health;i++){
 		D().drawImage(

@@ -3,13 +3,13 @@ function TurnMenu(){
 		window.TurnMenuObject={
 			options:[
 				{
-					title:'Jump Attack',
-					points:2,
+					title:'Jump',
+					points:1,
 					enabled:true
 				},
 				{
-					title:'Hit Attack',
-					points:3,
+					title:'Hit',
+					points:1.5,
 					enabled:true
 				},
 				{
@@ -42,7 +42,13 @@ function TurnMenu(){
 					this.optionID=0;
 				}
 				
-				if(I().pressed(' ')){
+				if(I().pressed(' ') && this.options[this.optionID].enabled){
+					if(this.optionID == 1){
+						this.options[this.optionID].enabled=false;
+					}else{
+						this.options[1].enabled=true;
+					}
+					
 					F().playerMove=this.optionID;
 					this.optionID=0;
 				}
@@ -74,7 +80,25 @@ function TurnMenu(){
 					D().fillStyle=drawColor;
 					
 					D().fillText(
-						option.title + (!option.enabled ? ' [can\'t]' : ''),
+						(
+							option.title
+							+
+							' ('
+							+
+							(
+								TurnMenu().options[i].points
+								+
+								Math.round(
+									TurnMenu().options[i].points
+									*
+									(P().level / 4)
+								)
+							)
+							+
+							' attack)'
+							+
+							(!option.enabled ? ' [can\'t]' : '')
+						),
 						32 * S().zoom,
 						(16 + (8 * i)) * S().zoom
 					);

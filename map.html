@@ -12,21 +12,76 @@ body {
 canvas {
 	background-color:#F0F;
 }
+
+#ch {
+	overflow:auto;
+}
 </style>
 <script type="text/javascript">
-var map=[
-	[ 2 ],
-	[ 2 ],
-	[ 2 ],
-	[ 2 ],
-	[ 2 ],
-	[ 2 ],
-	[ 2, 1, 0, 0, 0, 1, 1, 0, 1, 1, 1, 1 ],
-	[ 2, 2, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0 ],
-	[ 2, 2, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0 ],
-	[ 2, 2, 1, 1, 1, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ],
-	[ 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2 ],
-	[ 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2 ],
+var map=
+[
+	[
+		1,
+	],
+	[
+		2,
+	],
+	[
+		2,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,
+		null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,
+		null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,
+		null,null,null,null,null,null,null,null,0,0,0,0,0,0,0,0,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,
+		null,null,null,null,null,null,null,null,null,null,null,0,2,2,2,
+	],
+	[
+		2,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,
+		null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,
+		null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,
+		null,null,null,null,null,null,null,0,0,0,0,0,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,
+		null,null,null,null,null,null,null,null,null,2,2,2,2,0,
+	],
+	[
+		2,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,
+		null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,
+		null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,
+		null,null,null,null,null,2,2,2,2,2,2,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,
+		null,null,null,null,2,2,2,0,0,null,null,0,0,0,0,null,0,0,0,0,
+	],
+	[
+		2,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,
+		null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,
+		null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,
+		0,2,2,2,2,2,2,2,2,2,2,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,
+		null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,
+		null,null,null,null,0,0,null,0,0,0,0,
+	],
+	[
+		2,2,2,2,2,0,0,0,0,0,0,0,0,null,null,null,null,null,null,null,null,null,null,2,2,null,null,null,2,2,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,
+		null,null,null,null,null,2,2,2,null,null,2,2,2,2,2,2,null,null,0,0,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,2,2,2,2,2,0,0,
+	],
+	[
+		2,2,2,2,2,0,0,0,0,0,0,0,null,null,null,null,null,null,null,null,null,null,null,2,2,null,null,null,2,2,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,
+		null,null,null,null,null,2,2,2,null,null,null,0,0,0,0,0,null,null,0,0,0,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,2,2,2,2,2,2,2,0,0,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,
+		null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,
+		null,null,2,2,null,null,null,2,null,null,null,2,2,
+	],
+	[
+		2,2,2,2,2,0,0,0,0,0,0,0,null,null,null,null,null,null,null,null,null,2,2,2,2,null,null,null,2,2,2,2,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,
+		null,2,2,2,2,2,null,null,null,0,0,0,0,0,null,null,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,2,2,2,0,0,0,0,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,
+		null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,
+		null,null,null,2,2,null,null,null,null,null,null,null,2,2,
+	],
+	[
+		2,2,2,2,2,2,2,2,2,2,0,0,0,0,0,0,0,0,0,0,0,2,2,2,2,0,0,0,2,2,2,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,2,2,2,2,null,null,null,null,null,null,null,null,null,0,0,0,0,0,0,0,0,0,0,2,2,2,2,2,2,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,
+		null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,2,2,2,0,null,null,null,null,null,null,null,0,2,2,2,
+	],
+	[
+		2,2,2,2,2,2,2,2,2,2,0,0,2,2,2,2,2,2,2,2,2,2,2,2,2,0,0,0,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,null,null,null,null,null,null,null,null,null,null,0,0,0,0,0,0,0,0,0,2,2,2,2,2,2,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,null,null,null,null,null,2,2,2,2,2,2,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,
+		null,null,null,null,2,2,0,0,null,null,null,null,null,null,null,null,0,2,2,
+	],
+	[
+		2,2,2,2,2,2,2,2,2,2,0,0,2,2,2,2,2,2,2,2,2,2,2,2,2,0,0,0,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,null,null,null,0,null,null,null,null,null,null,0,0,0,0,0,0,0,0,0,2,2,2,2,2,2,2,0,0,0,0,0,0,0,0,0,0,0,2,2,2,2,2,2,2,2,null,null,2,2,2,2,2,2,null,null,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,0,0,0,null,null,null,null,null,null,null,null,null,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,
+	],
 ];
 function M(){
 	return window.map;
@@ -45,8 +100,8 @@ function D(){
 	return window.ctx=C().getContext('2d');
 }
 function resizeCanvas(){
-	C().width=window.innerWidth;
-	C().height=(C().width / 6);
+	C().width=window.innerWidth * 5;
+	C().height=(C().width / 25);
 }
 function loop(){
 	update();
@@ -231,6 +286,10 @@ window.addEventListener('keydown',function(e){
 	}
 });
 window.addEventListener('wheel',function(e){
+	if(e.shiftKey){
+		return;
+	}
+	
 	if(e.deltaY > 0){
 		Co().tile++;
 	}
@@ -260,7 +319,7 @@ function update(){
 <body>
 <img src="sprites.png" hidden id="sprites">
 <h1>incredibly sloppy map designer</h1>
-<canvas id="c"></canvas>
+<div id="ch"><canvas id="c"></canvas></div>
 <div><code>coordinates here</code></div>
 <div><textarea name="lol" style="margin-left:2em;width:90%;height:10em;">test</textarea></div>
 </body>

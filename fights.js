@@ -24,12 +24,35 @@ function Fight(){
 		
 		dead:null,
 		
+		randomCountdown:null,
+		randomCountdownLimit:60,
+		
+		randomSelection:null,
+		
+		enemyMove:0,
+		
 		draw:function(){
 			D().fillText(
 				this.convoString,
 				16 * S().zoom,
 				8 * S().zoom
 			);
+			
+			
+			
+			if(this.randomCountdown != null && this.randomCountdown != 0){
+				D().fillText(
+					(
+						this.randomCountdown <= this.randomCountdownLimit / 2
+						?
+							6 - Math.floor(this.randomSelection)
+						:
+							Math.ceil(Math.random() * 6)
+					),
+					(S().size.X / 2) * S().zoom,
+					8 * S().zoom
+				);
+			}
 			
 			
 			
@@ -98,6 +121,8 @@ function Fight(){
 			}
 			
 			if(this.yourTurn){
+				this.randomCountdown=null;
+				
 				if(this.playerMove == null){
 					TurnMenu().update();
 				}else{
@@ -176,38 +201,51 @@ function Fight(){
 					}
 				}
 			}else{
-				if(this.turnEnding){
-					if(this.e.position.X < this.e.position.initX){
-						this.e.moveLeft=!(this.e.moveRight=true);
-					}else{
-						this.e.moveRight=false;
-						this.e.flip=true;
-						this.e.position.X=this.e.position.initX;
-						this.turnEnding=false;
-						this.yourTurn=true;
-					}
+				if(this.randomCountdown == null){
+					this.randomCountdown=this.randomCountdownLimit;
+					this.randomSelection=Math.random() * 6;
+				}
+				
+				if(this.randomCountdown > 0){
+					this.randomCountdown--;
 				}else{
-					this.e.moveLeft=this.e.position.X > P().position.X;
-					
-					if(
-						this.e.position.X < P().position.X + 8
-						&&
-						this.e.position.Y > P().position.Y - 8
-					){
-						this.e.gravity=-3;
-						this.turnEnding=true;
-						P().health-=this.e.attackPower;
-						Ef().new(
-							this.e.attackPower,
-							P().position.X,
-							P().position.Y
-						);
-					}
-					
-					if(this.e.jump){
-						this.e.jump=false;
-					}else if(this.e.position.X == P().position.X + 28){
-						this.e.jump=true;
+					if(this.turnEnding){
+						if(this.e.position.X < this.e.position.initX){
+							this.e.moveLeft=!(this.e.moveRight=true);
+						}else{
+							this.e.moveRight=false;
+							this.e.flip=true;
+							this.e.position.X=this.e.position.initX;
+							this.turnEnding=false;
+							this.yourTurn=true;
+						}
+					}else{
+						this.e.moveLeft=this.e.position.X > P().position.X;
+						
+						if(
+							this.e.position.X < P().position.X + 8
+							&&
+							this.e.position.Y > P().position.Y - 8
+						){
+							let effectivePower=this.e.attackPower;
+							effectivePower += 1.5;
+							effectivePower -= Math.round(this.randomSelection) / 2;
+							
+							this.e.gravity=-3;
+							this.turnEnding=true;
+							P().health-=effectivePower;
+							Ef().new(
+								effectivePower,
+								P().position.X,
+								P().position.Y
+							);
+						}
+						
+						if(this.e.jump){
+							this.e.jump=false;
+						}else if(this.e.position.X == P().position.X + 28){
+							this.e.jump=true;
+						}
 					}
 				}
 			}
@@ -221,7 +259,7 @@ function Fight(){
 
 
 function FirstFight(getThreshold){
-	let threshold=204;
+	let threshold=320;
 	
 	if(getThreshold){
 		return threshold;
@@ -238,6 +276,49 @@ function FirstFight(getThreshold){
 	];
 	
 	F.e=window.FirstEnemy;
+	
+	return F;
+}
+
+function SecondFight(getThreshold){
+	let threshold = 124 * 8;
+	
+	if(getThreshold){
+		return threshold;
+	}
+	
+	let F=new Fight();
+	
+	F.threshold=threshold;
+	
+	F.conversation=[
+		'Hey! Who are you?',
+		'I bet you can\'t beat me up!'
+	];
+	
+	F.e=window.SecondEnemy;
+	
+	return F;
+}
+
+function ThirdFight(getThreshold){
+	let threshold = 250 * 8;
+	
+	if(getThreshold){
+		return threshold;
+	}
+	
+	let F=new Fight();
+	
+	F.threshold=threshold;
+	
+	F.conversation=[
+		'You beat up those other guys?!',
+		'Well, I\'m not so easy!',
+		'Get doomed!'
+	];
+	
+	F.e=window.ThirdEnemy;
 	
 	return F;
 }
