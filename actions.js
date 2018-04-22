@@ -30,6 +30,7 @@ function update(){
 	window.ThirdEnemy.update();
 	window.Vial0.update();
 	window.Vial1.update();
+	window.Vial2.update();
 	
 	Ef().update();
 	Cam().update();
@@ -82,6 +83,7 @@ function draw(){
 	
 	window.Vial0.draw();
 	window.Vial1.draw();
+	window.Vial2.draw();
 	P().draw();
 	window.FirstEnemy.draw();
 	window.SecondEnemy.draw();

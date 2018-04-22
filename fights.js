@@ -77,6 +77,7 @@ function Fight(){
 						if(this.characterWait++ >= this.characterWaitLimit){
 							this.convoString += this.conversation[this.convoStringID].substr(this.convoString.length, 1);
 							this.characterWait=0;
+							So().txt.play();
 						}
 					}
 				// If the line is done being written
@@ -114,6 +115,8 @@ function Fight(){
 			){
 				if(!alreadyDead){
 					this.dead.gravity=-5;
+					this.dead.flipVertically=true;
+					So().death.play();
 				}
 				
 				this.dead.touchingBottom=this.dead.touchingTop=this.dead.touchingLeft=this.dead.touchingRight=function(){return false;}
@@ -159,10 +162,11 @@ function Fight(){
 									P().moveLeft=!(P().moveRight=false);
 									this.e.health-=(hpm=TurnMenu().options[this.playerMove].points + Math.round(TurnMenu().options[this.playerMove].points * (P().level / 4)));
 									Ef().new(
-										hpm,
+										'+' + hpm,
 										this.e.position.X + 8,
 										this.e.position.Y
 									);
+									So().hurt.play();
 								}
 								
 								break;
@@ -179,10 +183,11 @@ function Fight(){
 									this.turnEnding=true;
 									this.e.health-=(hpm=TurnMenu().options[this.playerMove].points + Math.round(TurnMenu().options[this.playerMove].points * (P().level / 4)));
 									Ef().new(
-										hpm,
+										'+' + hpm,
 										this.e.position.X + 8,
 										this.e.position.Y
 									);
+									So().hurt.play();
 								}
 								
 								break;
@@ -235,10 +240,11 @@ function Fight(){
 							this.turnEnding=true;
 							P().health-=effectivePower;
 							Ef().new(
-								effectivePower,
+								'+' + effectivePower,
 								P().position.X,
 								P().position.Y
 							);
+							So().hurt.play();
 						}
 						
 						if(this.e.jump){
@@ -271,7 +277,7 @@ function FirstFight(getThreshold){
 	
 	F.conversation=[
 		'Halt!',
-		'. . .',
+		'... Who are you?',
 		'Fight me!'
 	];
 	
@@ -292,7 +298,7 @@ function SecondFight(getThreshold){
 	F.threshold=threshold;
 	
 	F.conversation=[
-		'Hey! Who are you?',
+		'Hey!',
 		'I bet you can\'t beat me up!'
 	];
 	
@@ -319,6 +325,28 @@ function ThirdFight(getThreshold){
 	];
 	
 	F.e=window.ThirdEnemy;
+	
+	return F;
+}
+
+function FourthFight(getThreshold){
+	let threshold = 300 * 8;
+	
+	if(getThreshold){
+		return threshold;
+	}
+	
+	let F=new Fight();
+	
+	F.threshold=threshold;
+	
+	F.conversation=[
+		'...',
+		'I\'ve been waiting for you',
+		'It\'s foolish to come against me!'
+	];
+	
+	F.e=window.FourthEnemy;
 	
 	return F;
 }

@@ -28,10 +28,12 @@ function TurnMenu(){
 				
 				if(I().pressed('ArrowDown')){
 					this.optionID++;
+					So().txt.play();
 				}
 				
 				if(I().pressed('ArrowUp')){
 					this.optionID--;
+					So().txt.play();
 				}
 				
 				if(this.optionID < 0){
@@ -51,6 +53,7 @@ function TurnMenu(){
 					
 					F().playerMove=this.optionID;
 					this.optionID=0;
+					So().txt.play();
 				}
 			},
 			

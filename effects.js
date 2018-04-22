@@ -33,7 +33,7 @@ var Effects = {
 	
 	new:function(power, X, Y){
 		this.list.push({
-			title:'+' + power,
+			title:power,
 			expires:30,
 			position:{
 				X:X,

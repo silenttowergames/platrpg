@@ -21,66 +21,89 @@ canvas {
 var map=
 [
 	[
-		1,
-	],
-	[
-		2,
-	],
-	[
-		2,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,
+		1,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,
 		null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,
 		null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,
-		null,null,null,null,null,null,null,null,0,0,0,0,0,0,0,0,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,
-		null,null,null,null,null,null,null,null,null,null,null,0,2,2,2,
-	],
-	[
-		2,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,
 		null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,
 		null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,
-		null,null,null,null,null,null,null,0,0,0,0,0,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,
-		null,null,null,null,null,null,null,null,null,2,2,2,2,0,
+		null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,
+		null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,0,0,0,0,0,2,null,null,null,2,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,
+		null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,
+		null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,
+		null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,
+		null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,
+		null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,2,null,null,null,2,null,null,0,2,null,0,2,2,2,0,0,0,
 	],
 	[
 		2,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,
 		null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,
 		null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,
-		null,null,null,null,null,2,2,2,2,2,2,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,
-		null,null,null,null,2,2,2,0,0,null,null,0,0,0,0,null,0,0,0,0,
-	],
-	[
-		2,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,
 		null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,
 		null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,
-		0,2,2,2,2,2,2,2,2,2,2,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,
 		null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,
-		null,null,null,null,0,0,null,0,0,0,0,
-	],
-	[
-		2,2,2,2,2,0,0,0,0,0,0,0,0,null,null,null,null,null,null,null,null,null,null,2,2,null,null,null,2,2,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,
-		null,null,null,null,null,2,2,2,null,null,2,2,2,2,2,2,null,null,0,0,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,2,2,2,2,2,0,0,
-	],
-	[
-		2,2,2,2,2,0,0,0,0,0,0,0,null,null,null,null,null,null,null,null,null,null,null,2,2,null,null,null,2,2,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,
-		null,null,null,null,null,2,2,2,null,null,null,0,0,0,0,0,null,null,0,0,0,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,2,2,2,2,2,2,2,0,0,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,
+		null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,0,0,0,0,0,2,2,0,2,2,0,0,0,0,0,0,null,null,null,null,null,null,null,null,2,null,null,null,2,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,
 		null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,
-		null,null,2,2,null,null,null,2,null,null,null,2,2,
-	],
-	[
-		2,2,2,2,2,0,0,0,0,0,0,0,null,null,null,null,null,null,null,null,null,2,2,2,2,null,null,null,2,2,2,2,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,
-		null,2,2,2,2,2,null,null,null,0,0,0,0,0,null,null,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,2,2,2,0,0,0,0,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,
 		null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,
-		null,null,null,2,2,null,null,null,null,null,null,null,2,2,
+		null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,
+		null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,2,null,null,null,2,null,null,0,2,null,0,2,0,0,0,0,0,
 	],
 	[
-		2,2,2,2,2,2,2,2,2,2,0,0,0,0,0,0,0,0,0,0,0,2,2,2,2,0,0,0,2,2,2,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,2,2,2,2,null,null,null,null,null,null,null,null,null,0,0,0,0,0,0,0,0,0,0,2,2,2,2,2,2,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,
-		null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,2,2,2,0,null,null,null,null,null,null,null,0,2,2,2,
+		2,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,0,0,0,0,0,0,0,0,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,0,2,2,2,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,
+		null,null,null,null,null,null,null,null,0,0,0,0,0,2,2,2,0,0,0,0,0,0,null,null,null,null,null,null,null,null,null,2,null,null,null,2,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,
+		null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,
+		2,2,2,null,null,null,0,0,0,null,null,null,2,2,0,null,null,2,null,null,null,2,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,
+		null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,2,null,null,null,2,null,null,0,2,0,null,2,0,0,0,0,0,
 	],
 	[
-		2,2,2,2,2,2,2,2,2,2,0,0,2,2,2,2,2,2,2,2,2,2,2,2,2,0,0,0,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,null,null,null,null,null,null,null,null,null,null,0,0,0,0,0,0,0,0,0,2,2,2,2,2,2,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,null,null,null,null,null,2,2,2,2,2,2,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,
-		null,null,null,null,2,2,0,0,null,null,null,null,null,null,null,null,0,2,2,
+		2,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,0,0,0,0,0,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,2,2,2,2,0,null,null,2,0,2,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,
+		null,null,null,null,null,null,null,null,null,0,0,0,0,0,0,2,0,0,0,0,0,0,null,null,null,null,null,null,2,null,null,2,null,null,null,2,null,null,null,0,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,
+		null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,2,2,2,null,null,null,null,2,2,null,null,null,2,2,null,null,null,2,0,null,null,2,null,null,null,2,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,
+		null,null,null,null,null,null,null,null,null,null,null,2,null,null,null,2,null,null,0,2,null,0,2,0,0,0,0,0,0,0,0,0,0,0,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,
 	],
 	[
-		2,2,2,2,2,2,2,2,2,2,0,0,2,2,2,2,2,2,2,2,2,2,2,2,2,0,0,0,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,null,null,null,0,null,null,null,null,null,null,0,0,0,0,0,0,0,0,0,2,2,2,2,2,2,2,0,0,0,0,0,0,0,0,0,0,0,2,2,2,2,2,2,2,2,null,null,2,2,2,2,2,2,null,null,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,0,0,0,null,null,null,null,null,null,null,null,null,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,
+		2,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,2,2,2,2,2,2,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,2,2,2,0,0,null,0,2,2,0,0,null,0,0,0,0,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,
+		null,null,null,null,null,null,null,null,0,0,0,0,0,0,0,2,2,0,0,0,0,null,null,0,0,0,null,null,2,null,null,2,null,null,null,2,null,null,null,0,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,
+		null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,
+		null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,
+		null,2,null,null,null,2,0,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,
+		null,null,null,null,null,null,2,null,null,0,0,0,null,0,2,null,0,2,2,2,2,2,2,2,2,0,0,null,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+	],
+	[
+		2,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,0,0,2,2,2,2,2,2,2,2,2,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,0,2,0,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,0,0,null,0,0,0,0,null,null,null,null,null,null,null,null,null,null,null,null,null,null,0,0,2,2,0,0,0,0,null,0,0,0,0,0,0,null,0,null,0,2,2,null,null,2,null,null,2,null,null,null,2,null,null,null,0,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,
+		null,null,null,null,null,null,null,null,null,null,null,null,2,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,
+		null,null,null,null,null,null,null,null,null,null,null,null,2,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,
+		null,null,null,null,null,null,null,2,null,null,null,0,null,null,null,null,null,0,2,2,0,0,2,0,0,2,2,2,0,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+	],
+	[
+		2,2,2,2,2,0,0,0,0,0,0,0,0,null,null,null,null,null,null,null,null,null,null,2,2,null,null,null,2,2,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,2,2,2,null,null,0,2,2,2,2,2,null,null,2,2,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,2,2,2,2,2,0,0,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,
+		null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,
+		null,null,0,2,2,2,0,0,0,2,0,0,0,0,0,null,0,0,2,0,0,0,2,null,null,2,null,null,2,null,null,null,2,null,null,null,0,null,null,null,0,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,
+		null,null,null,null,2,null,null,null,2,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,
+		null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,
+		null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,
+		0,null,null,null,null,null,0,null,null,null,null,2,2,0,null,0,null,0,2,2,2,2,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+	],
+	[
+		2,2,2,2,2,0,0,0,0,0,0,0,null,null,null,null,null,null,null,null,null,null,0,2,2,null,null,null,2,2,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,2,2,2,null,null,null,0,2,2,0,0,null,null,2,2,0,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,2,2,2,2,2,2,2,0,0,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,0,0,2,2,0,0,0,2,null,0,0,0,0,0,0,2,2,0,0,0,2,null,null,2,null,null,2,null,null,null,2,null,null,null,2,null,null,null,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,null,null,null,null,null,null,null,null,null,2,null,0,0,2,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,
+		null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,null,null,null,null,null,null,null,null,null,null,0,0,0,null,null,0,0,0,null,0,null,null,0,0,0,0,0,0,2,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+	],
+	[
+		2,2,2,2,2,0,0,0,0,0,0,0,null,null,null,null,null,null,null,null,null,2,2,2,2,null,null,null,2,2,2,2,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,2,2,2,2,2,null,null,null,0,2,2,0,0,null,null,2,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,2,2,2,0,0,0,0,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,0,0,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,0,0,0,2,2,null,0,0,2,0,0,0,0,0,0,0,0,2,0,null,0,2,null,null,2,null,null,2,null,null,null,2,null,null,null,2,null,null,null,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,null,null,null,null,null,null,null,null,null,2,null,null,null,2,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,2,2,2,0,0,2,2,2,null,null,null,null,null,null,null,null,null,null,null,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,null,null,null,null,null,null,null,null,2,null,0,0,0,null,null,0,0,null,null,0,null,null,null,0,null,null,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+	],
+	[
+		2,2,2,2,2,2,2,2,2,2,0,0,0,0,0,0,0,0,0,0,0,2,2,2,2,0,0,0,2,2,2,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,2,2,2,2,null,null,null,null,2,2,null,null,null,0,2,2,0,0,0,0,0,0,2,2,2,2,2,2,2,2,0,0,0,0,2,2,0,0,0,0,0,0,0,0,0,0,null,null,null,null,null,null,null,null,null,null,null,null,null,0,0,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,0,0,0,2,2,null,null,0,2,2,2,2,2,0,0,null,0,2,null,null,0,2,null,null,2,null,null,2,null,null,null,2,null,null,null,2,null,null,null,null,null,0,0,0,0,0,2,2,null,null,null,null,null,null,null,null,null,null,2,2,2,2,null,null,2,null,null,null,2,null,null,2,2,2,2,2,2,2,2,2,2,2,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,
+		null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,
+		null,null,null,null,null,null,null,null,null,null,null,2,null,0,0,2,null,null,0,0,null,null,0,null,null,null,0,null,0,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+	],
+	[
+		2,2,2,2,2,2,2,2,2,2,0,0,2,2,2,2,2,2,2,2,2,2,2,2,2,0,0,0,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,null,null,null,null,2,2,null,null,null,null,2,2,0,0,0,0,0,0,2,2,2,2,2,2,2,2,0,0,0,2,2,2,0,0,0,0,0,0,0,0,0,0,0,0,0,null,null,2,2,2,2,2,2,null,null,0,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,0,0,0,2,2,null,null,null,2,null,null,0,2,0,0,null,null,2,null,null,0,2,null,null,2,null,null,2,null,null,null,2,null,null,null,2,null,null,null,null,null,null,null,null,null,null,2,2,null,null,null,null,null,null,null,null,null,null,0,2,2,2,0,null,2,null,null,null,2,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,
+		null,null,null,null,null,null,null,null,2,2,2,2,2,2,null,null,null,null,null,0,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,
+		null,null,null,null,2,null,null,0,2,null,null,0,0,null,null,2,null,null,0,0,null,2,2,2,2,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+	],
+	[
+		2,2,2,2,2,2,2,2,2,2,0,0,2,2,2,2,2,2,2,2,2,2,2,2,2,0,0,0,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,null,null,null,0,2,2,null,null,null,null,2,2,0,0,0,0,0,0,2,2,2,2,2,2,2,2,0,0,0,2,2,0,0,0,0,0,0,2,2,2,2,2,2,2,2,null,null,2,2,2,2,2,2,null,null,0,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,0,0,0,2,2,null,null,null,2,null,null,0,2,0,0,0,0,2,0,0,0,2,0,0,2,0,0,2,0,2,0,2,0,0,0,2,0,0,0,0,0,0,0,0,0,0,2,2,null,null,null,null,null,null,null,null,null,null,0,0,0,0,0,null,2,null,null,0,2,null,null,0,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,
+		null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,
+		null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,2,null,null,null,2,null,null,0,2,null,null,2,2,null,null,2,null,null,2,0,null,2,2,2,2,2,0,0,0,0,0,0,0,0,0,0,0,0,0,2,
 	],
 ];
 function M(){
@@ -101,7 +124,7 @@ function D(){
 }
 function resizeCanvas(){
 	C().width=window.innerWidth * 5;
-	C().height=(C().width / 25);
+	C().height=(C().width / 26);
 }
 function loop(){
 	update();

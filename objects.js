@@ -56,6 +56,10 @@ function O(){
 				D().scale(-1,1);
 			}
 			
+			if(this.flipVertically){
+				D().scale(1,-1);
+			}
+			
 			D().drawImage(
 				G(),
 				1 + (frame[0] * 9),
@@ -63,7 +67,7 @@ function O(){
 				8,
 				8,
 				(this.position.X + (this.flip ? 8 : 0)) * S().zoom * (this.flip ? -1 : 1) - (Cam().position.X * (this.flip ? -1 : 1)),
-				this.position.Y * S().zoom,
+				(this.position.Y + (this.flipVertically ? 8 : 0)) * S().zoom * (this.flipVertically ? -1 : 1),
 				8 * S().zoom,
 				8 * S().zoom
 			);
@@ -71,9 +75,15 @@ function O(){
 			if(this.flip){
 				D().scale(-1,1);
 			}
+			
+			if(this.flipVertically){
+				D().scale(1,-1);
+			}
 		},
 		
 		flip:false,
+		
+		flipVertically:false,
 		
 		hitbox:function(){
 			return {
@@ -259,14 +269,20 @@ function O(){
 					this.animation.duration=this.animation.list.attacking[0][1];
 				}
 				
+				if(this.animation.frameID == 1){
+					So().punch.play();
+				}
+				
 				return;
 			}
 			
 			let setAnimation='idle';
 			
 			// Jumping
-			if(this.jump && this.coyoteTime < this.coyoteTimeLimit){
+			if(this.jump && this.coyoteTime < this.coyoteTimeLimit && this.gravity >= 0){
 				this.gravity=-4;
+				So().jump.play();
+				console.log(So().jump);
 			}
 			
 			
@@ -370,7 +386,7 @@ function P(startOver){
 		p.level=XP().currentLevel;
 		p.XP=XP().currentXP;
 		
-		p.position.X=16;
+		p.position.X=XP().lastCheckpointBuffer=XP().lastCheckpoint;
 		
 		p.update=function(){
 			if(!F() && !XP().cutscene){
@@ -419,6 +435,11 @@ SecondEnemy.XP=245;
 SecondEnemy.attackPower=2;
 var ThirdEnemy=new E();
 ThirdEnemy.position.X=ThirdEnemy.position.initX=(250 * 8) + 60;
-ThirdEnemy.health=4.5;
+ThirdEnemy.health=5;
 ThirdEnemy.XP=400;
 ThirdEnemy.attackPower=2.25;
+var FourthEnemy=new E();
+FourthEnemy.position.X=FourthEnemy.position.initX=(300 * 8) + 60;
+FourthEnemy.health=5;
+FourthEnemy.XP=950;
+FourthEnemy.attackPower=3;

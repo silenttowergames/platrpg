@@ -24,6 +24,7 @@ function Vial(X, Y){
 				P().XP+=50;
 				P().health=5;
 				this.used=true;
+				So().vial.play();
 			}
 		},
 		
@@ -55,4 +56,9 @@ var Vial0=new Vial(
 var Vial1=new Vial(
 	216 * 8,
 	8 * 2
+);
+
+var Vial2=new Vial(
+	278 * 8,
+	8 * 3
 );
