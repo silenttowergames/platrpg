@@ -82,8 +82,6 @@ function draw(){
 		if(window.intro < 15){
 			let alpha=1 / (15 / (15 - (window.intro)));
 			
-			console.log(alpha);
-			
 			D().fillStyle='rgba(0,0,0,' + alpha + ')';
 			D().fillRect(0,0,C().width,C().height);
 		}
