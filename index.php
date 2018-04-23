@@ -6,7 +6,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="author" content="Silent Tower Games LLC">
 <meta name="description" content="Platformer meets turn-based RPG fighting. Jump over treacherous obstacles between turn-based fights where you gain XP and level up.">
-<meta property="og:image" content="https://silenttowergames.com/ludumdare41/screen0.png">
+<meta property="og:image" content="https://silenttowergames.com/ludumdare41/screen2.png">
 <meta property="og:description" content="Platformer meets turn-based RPG fighting. Jump over treacherous obstacles between turn-based fights where you gain XP and level up.">
 <meta property="og:title" content="Super Platformer RPG">
 <meta property="og:type" content="website">
